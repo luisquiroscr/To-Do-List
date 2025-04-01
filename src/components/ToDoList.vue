@@ -7,6 +7,9 @@
   </div>
 
   <h2>Tareas Pendientes</h2>
+  <p v-if="tareasPendientes === 0">
+    <span>No hay tareas por hacer</span>
+  </p>
   <ul>
     <li v-for="(tarea, index) in listaDeTareas" :key="index">
       {{ index }} - {{ tarea }}
@@ -18,10 +21,8 @@
   <p v-if="contadorDeTareasCompletadas === 0">
     <span>No hay tareas completadas</span>
   </p>
-  <ul v-else style="min-height: 100px; background-color: green;">
-    <li v-for="(tarea, index) in tareasCompletadas" :key="index">
-      {{ index }} - {{ tarea }}
-    </li>
+  <ul v-else style="min-height: 100px; background-color: green">
+    <li v-for="(tarea, index) in tareasCompletadas" :key="index">{{ index }} - {{ tarea }}</li>
   </ul>
 
   <h2>Resumen de tareas</h2>
@@ -36,41 +37,40 @@ export default {
       titulo1: 'Aprendizaje de Vue',
       listaDeTareas: [],
       tareaNueva: '',
-      tareasCompletadas: []
-    };
+      tareasCompletadas: [],
+    }
   },
 
   computed: {
     tareasPendientes() {
-      return this.listaDeTareas.length;
+      return this.listaDeTareas.length
     },
     contadorDeTareasCompletadas() {
-      return this.tareasCompletadas.length;
+      return this.tareasCompletadas.length
     },
     totalDeTareas() {
-      return this.listaDeTareas.length + this.tareasCompletadas.length;
-    }
+      return this.listaDeTareas.length + this.tareasCompletadas.length
+    },
   },
 
   methods: {
     agregarElemento() {
       if (this.tareaNueva.trim() !== '') {
-        this.listaDeTareas.push(this.tareaNueva.trim());
-        this.tareaNueva = '';
+        this.listaDeTareas.push(this.tareaNueva.trim())
+        this.tareaNueva = ''
       }
     },
     eliminarElemento(index) {
-      this.tareasCompletadas.push(this.listaDeTareas[index]);
-      this.listaDeTareas.splice(index, 1);
-    }
-  }
-};
+      this.tareasCompletadas.push(this.listaDeTareas[index])
+      this.listaDeTareas.splice(index, 1)
+    },
+  },
+}
 </script>
 
 <style scoped>
 .formulario {
-   display: block;
-   background-color: red;
- }
-
+  display: block;
+  background-color: red;
+}
 </style>
