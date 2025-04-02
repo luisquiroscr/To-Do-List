@@ -13,7 +13,8 @@
   <ul v-else>
     <li v-for="(tarea, index) in listaDeTareas" :key="index">
       {{ index }} - {{ tarea }}
-      <button @click="eliminarElemento(index)">Eliminar</button>
+      <button v-on:click="editarElemento">Editar</button>
+      <button v-on:click="eliminarElemento(index)">Eliminar</button>
     </li>
   </ul>
 
@@ -31,7 +32,7 @@
 
 
 <hr/>
-<editor-de-to-do-list/>
+<editor-de-to-do-list v-if="mostrarEditor"/>
 
 
 
@@ -48,6 +49,8 @@ export default {
       listaDeTareas: [],
       tareaNueva: '',
       tareasCompletadas: [],
+
+      mostrarEditor: false,
     }
   },
 
@@ -74,6 +77,12 @@ export default {
       this.tareasCompletadas.push(this.listaDeTareas[index])
       this.listaDeTareas.splice(index, 1)
     },
+
+    editarElemento() {
+      alert ('editar')
+    },
+
+
   },
 
   components: {
