@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h1>Editar to-do: {{ index }} - {{ tarea }}</h1>
+    <h1>Editar to-do: {{ indice }} - {{ tarea }}</h1>
     <input v-bind:value="tarea"/>
     <button>Guardar</button>
   </section>

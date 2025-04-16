@@ -32,7 +32,7 @@
 
   <hr />
   Quiero Editar la tarea: {{ index }} - {{ tareaEditar }},
-  <editor-de-to-do-list v-if="mostrarEditor" v-bind:indice="indice" v-bind:tarea="tareaEditar"  />
+  <editor-de-to-do-list v-if="mostrarEditor" v-bind:indice="index" v-bind:tarea="tareaEditar"  />
 </template>
 
 <script>
