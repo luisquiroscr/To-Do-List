@@ -14,7 +14,7 @@
     <li v-for="(tarea, index) in listaDeTareas" :key="index">
       {{ index }} - {{ tarea }}
       <button v-on:click="editarElemento">Editar</button>
-      <button v-on:click="eliminarElemento(index)">Eliminar</button>
+      <button v-on:click="eliminarElemento(index)">Completar</button>
     </li>
   </ul>
 
@@ -30,16 +30,11 @@
   <p>Completadas: {{ contadorDeTareasCompletadas }} | Pendientes: {{ tareasPendientes }}</p>
   <p>Total de tareas: {{ totalDeTareas }}</p>
 
-
-<hr/>
-<editor-de-to-do-list v-if="mostrarEditor"/>
-
-
-
+  <hr />
+  <editor-de-to-do-list v-if="mostrarEditor" />
 </template>
 
 <script>
-
 import EditorDeToDoList from './EditorDeToDoList.vue'
 
 export default {
@@ -79,10 +74,8 @@ export default {
     },
 
     editarElemento() {
-      alert ('editar')
+      alert('editar')
     },
-
-
   },
 
   components: {
