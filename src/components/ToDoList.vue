@@ -87,8 +87,10 @@ export default {
       this.tareaEditar = tarea
     },
 
-    updateToDoList() {
-      alert('Update desde el padre')
+    updateToDoList({tarea, indice}) {
+      alert('Update desde el padre, tarea:' + tarea + ' ' + indice)
+
+      this.listaDeTareas[indice] = tarea
     },
   },
 
