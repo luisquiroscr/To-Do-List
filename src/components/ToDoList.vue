@@ -32,7 +32,12 @@
 
   <hr />
   Quiero Editar la tarea: {{ index }} - {{ tareaEditar }},
-  <editor-de-to-do-list v-if="mostrarEditor" v-bind:indice="index" v-bind:tarea="tareaEditar"  />
+  <editor-de-to-do-list
+  v-if="mostrarEditor"
+  v-bind:indice="index"
+  v-bind:tarea="tareaEditar"
+  v-on:editevent="updateToDoList"
+  />
 </template>
 
 <script>
@@ -80,6 +85,10 @@ export default {
       this.mostrarEditor = true,
       this.index = indice,
       this.tareaEditar = tarea
+    },
+
+    updateToDoList() {
+      alert('Update desde el padre')
     },
   },
 

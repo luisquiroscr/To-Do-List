@@ -2,7 +2,7 @@
   <section>
     <h1>Editar to-do: {{ indice }} - {{ tarea }}</h1>
     <input v-bind:value="tarea"/>
-    <button>Guardar</button>
+    <button v-on:click="notificarPadre">Guardar</button>   <!--Cuando le da al boton se le avisa al padre y eso ocurre en methods-->
   </section>
 </template>
 
@@ -17,6 +17,12 @@ export default {
   indice: {
     type: Number,
 }
+},
+
+methods: {
+  notificarPadre() {
+    this.$emit('editevent')
+  }
 }
 }
 </script>
