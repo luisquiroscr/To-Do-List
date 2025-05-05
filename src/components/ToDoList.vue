@@ -41,7 +41,8 @@
     v-bind:indice="index"
     v-bind:tarea="tareaEditar"
     v-on:editevent="updateToDoList"
-  />
+    v-bind:tareaNueva="tareaNueva"
+    />
 </template>
 
 <script>
@@ -95,6 +96,10 @@ export default {
 
       this.listaDeTareas[indice] = tarea
     },
+
+    esaTareaEstaMuyLarga(){
+      alert('ya mucho, esa tarea esta muy larga')
+    }
   },
 
   watch: {
@@ -105,6 +110,7 @@ export default {
           this.deshabilitar = true
         } else if (this.tareaNueva.length > 100) {
           this.deshabilitar = true
+          this.$refs.editor.esaTareaEstaMuyLarga()
         } else {
           this.deshabilitar = false
         }
