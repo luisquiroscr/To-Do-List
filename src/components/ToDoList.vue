@@ -2,8 +2,12 @@
   <h1>{{ titulo1 }}</h1>
 
   <div class="formulario">
-    <input v-model="tareaNueva" placeholder="Escribe una tarea" />
-    <button v-on:click="agregarElemento">Agregar</button>
+    <input
+      v-model="tareaNueva"
+      v-on:keydown.enter="agregarElemento"
+      placeholder="Escribe una tarea"
+    />
+    <button v-on:click="agregarElemento" :disabled="deshabilitar">Agregar</button>
   </div>
 
   <h2>Tareas Pendientes</h2>
@@ -33,10 +37,10 @@
   <hr />
   Quiero Editar la tarea: {{ index }} - {{ tareaEditar }},
   <editor-de-to-do-list
-  v-if="mostrarEditor"
-  v-bind:indice="index"
-  v-bind:tarea="tareaEditar"
-  v-on:editevent="updateToDoList"
+    v-if="mostrarEditor"
+    v-bind:indice="index"
+    v-bind:tarea="tareaEditar"
+    v-on:editevent="updateToDoList"
   />
 </template>
 
@@ -53,7 +57,9 @@ export default {
 
       mostrarEditor: false,
       tareaEditar: '',
-      index: null
+      index: null,
+
+      deshabilitar: false,
     }
   },
 
@@ -71,10 +77,9 @@ export default {
 
   methods: {
     agregarElemento() {
-      if (this.tareaNueva.trim() !== '') {
-        this.listaDeTareas.push(this.tareaNueva.trim())
-        this.tareaNueva = ''
-      }
+      this.listaDeTareas.push(this.tareaNueva)
+      this.tareasPendientes++
+      this.tareaNueva = ''
     },
     eliminarElemento(index) {
       this.tareasCompletadas.push(this.listaDeTareas[index])
@@ -82,15 +87,28 @@ export default {
     },
 
     editarElemento(indice, tarea) {
-      this.mostrarEditor = true,
-      this.index = indice,
-      this.tareaEditar = tarea
+      ;(this.mostrarEditor = true), (this.index = indice), (this.tareaEditar = tarea)
     },
 
-    updateToDoList({tarea, indice}) {
+    updateToDoList({ tarea, indice }) {
       alert('Update desde el padre, tarea:' + tarea + ' ' + indice)
 
       this.listaDeTareas[indice] = tarea
+    },
+  },
+
+  watch: {
+    tareaNueva: {
+      immediate: true,
+      handler() {
+        if (this.tareaNueva.length === 0) {
+          this.deshabilitar = true
+        } else if (this.tareaNueva.length > 100) {
+          this.deshabilitar = true
+        } else {
+          this.deshabilitar = false
+        }
+      },
     },
   },
 
